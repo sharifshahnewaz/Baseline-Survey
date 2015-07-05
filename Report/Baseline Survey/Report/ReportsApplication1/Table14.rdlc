@@ -1,0 +1,1089 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2005/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <DataSources>
+    <DataSource Name="baselineConnectionString">
+      <rd:DataSourceID>c37d7dfd-ccb3-4ae0-b057-f675d9d66a46</rd:DataSourceID>
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString>Data Source=RASEL-49A299613;Initial Catalog=baseline;Integrated Security=True</ConnectString>
+      </ConnectionProperties>
+    </DataSource>
+  </DataSources>
+  <InteractiveHeight>11in</InteractiveHeight>
+  <rd:DrawGrid>true</rd:DrawGrid>
+  <InteractiveWidth>8.5in</InteractiveWidth>
+  <rd:SnapToGrid>true</rd:SnapToGrid>
+  <RightMargin>1in</RightMargin>
+  <LeftMargin>1in</LeftMargin>
+  <BottomMargin>1in</BottomMargin>
+  <rd:ReportID>22d0be70-817c-4d9d-9342-816e7ec5e3dc</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet2_Table14Cow">
+      <Fields>
+        <Field Name="union_name">
+          <DataField>union name</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ID3___4">
+          <DataField>3 - 4</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="ID4_">
+          <DataField>4+</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="ID1_2">
+          <DataField>1-2</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="no">
+          <DataField>no</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="total">
+          <DataField>total</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>baselineConnectionString</DataSourceName>
+        <CommandText>SELECT     a.x AS [union name], a.y AS [1-2], b.y AS [3 - 4], c.y AS [4+], d.y AS no, ISNULL(a.y, 0) + ISNULL(b.y, 0) + ISNULL(c.y, 0) + ISNULL(d.y, 0) AS total
+FROM         (SELECT     [union].union_name AS x, ISNULL(a.y, 0) AS y
+                       FROM          [union] LEFT OUTER JOIN
+                                                  (SELECT     [union].union_name, COUNT(khana.khana_id) AS y
+                                                    FROM          khana INNER JOIN
+                                                                           cnc ON khana.cnc_id = cnc.cnc_id INNER JOIN
+                                                                           [union] ON cnc.union_id = [union].union_id
+                                                    WHERE      (khana.cow BETWEEN 1 AND 2)
+                                                    GROUP BY [union].union_name) a ON a.union_name = [union].union_name) a LEFT OUTER JOIN
+                          (SELECT     [union].union_name AS x, ISNULL(a.y, 0) AS y
+                            FROM          [union] LEFT OUTER JOIN
+                                                       (SELECT     [union].union_name, COUNT(khana.khana_id) AS y
+                                                         FROM          khana INNER JOIN
+                                                                                cnc ON khana.cnc_id = cnc.cnc_id INNER JOIN
+                                                                                [union] ON cnc.union_id = [union].union_id
+                                                         WHERE      (khana.cow BETWEEN 3 AND 4)
+                                                         GROUP BY [union].union_name) a ON a.union_name = [union].union_name) b ON a.x = b.x LEFT OUTER JOIN
+                          (SELECT     [union].union_name AS x, ISNULL(a.y, 0) AS y
+                            FROM          [union] LEFT OUTER JOIN
+                                                       (SELECT     [union].union_name, COUNT(khana.khana_id) AS y
+                                                         FROM          khana INNER JOIN
+                                                                                cnc ON khana.cnc_id = cnc.cnc_id INNER JOIN
+                                                                                [union] ON cnc.union_id = [union].union_id
+                                                         WHERE      (khana.cow &gt; 4)
+                                                         GROUP BY [union].union_name) a ON a.union_name = [union].union_name) c ON b.x = c.x LEFT OUTER JOIN
+                          (SELECT     [union].union_name AS x, ISNULL(a.y, 0) AS y
+                            FROM          [union] LEFT OUTER JOIN
+                                                       (SELECT     [union].union_name, COUNT(khana.khana_id) AS y
+                                                         FROM          khana INNER JOIN
+                                                                                cnc ON khana.cnc_id = cnc.cnc_id INNER JOIN
+                                                                                [union] ON cnc.union_id = [union].union_id
+                                                         WHERE      (khana.cow = 0)
+                                                         GROUP BY [union].union_name) a ON a.union_name = [union].union_name) d ON c.x = d.x
+</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <rd:DataSetInfo>
+        <rd:DataSetName>DataSet2</rd:DataSetName>
+        <rd:TableName>Table14Cow</rd:TableName>
+        <rd:TableAdapterName>Table14CowTableAdapter</rd:TableAdapterName>
+        <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
+        <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
+      </rd:DataSetInfo>
+    </DataSet>
+  </DataSets>
+  <Width>6.16666in</Width>
+  <Body>
+    <ReportItems>
+      <Textbox Name="textbox7">
+        <Top>0.125in</Top>
+        <Width>5.25in</Width>
+        <Style>
+          <FontWeight>700</FontWeight>
+          <TextAlign>Center</TextAlign>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+        <ZIndex>1</ZIndex>
+        <CanGrow>true</CanGrow>
+        <Left>0.375in</Left>
+        <Height>0.25in</Height>
+        <Value>Table 14: Distribution of Households by No of domestic animals/Birds</Value>
+      </Textbox>
+      <Table Name="table1">
+        <DataSetName>DataSet2_Table14Cow</DataSetName>
+        <Top>0.5in</Top>
+        <Details>
+          <TableRows>
+            <TableRow>
+              <TableCells>
+                <TableCell>
+                  <ReportItems>
+                    <Rectangle Name="rectangle7">
+                      <ZIndex>5</ZIndex>
+                      <ReportItems>
+                        <Textbox Name="union_name_1">
+                          <rd:DefaultName>union_name_1</rd:DefaultName>
+                          <Top>0.25in</Top>
+                          <Width>1in</Width>
+                          <Style>
+                            <FontWeight>700</FontWeight>
+                            <TextAlign>Center</TextAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                          <ZIndex>3</ZIndex>
+                          <CanGrow>true</CanGrow>
+                          <Height>0.25in</Height>
+                          <Value>=Fields!union_name.Value</Value>
+                        </Textbox>
+                        <Textbox Name="textbox24">
+                          <Top>0.5in</Top>
+                          <Width>0.25in</Width>
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                          <ZIndex>2</ZIndex>
+                          <CanGrow>true</CanGrow>
+                          <Left>1.125in</Left>
+                          <Value>%</Value>
+                        </Textbox>
+                        <Textbox Name="textbox23">
+                          <Top>0.22396in</Top>
+                          <Width>0.25in</Width>
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                          <ZIndex>1</ZIndex>
+                          <CanGrow>true</CanGrow>
+                          <Left>1.125in</Left>
+                          <Height>0.23958in</Height>
+                          <Value>%</Value>
+                        </Textbox>
+                        <Textbox Name="textbox25">
+                          <Width>0.375in</Width>
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                          <CanGrow>true</CanGrow>
+                          <Left>1.04167in</Left>
+                          <Height>0.25in</Height>
+                          <Value>NO</Value>
+                        </Textbox>
+                      </ReportItems>
+                      <Style>
+                        <BorderStyle>
+                          <Default>Groove</Default>
+                        </BorderStyle>
+                      </Style>
+                    </Rectangle>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Rectangle Name="rectangle1">
+                      <ZIndex>4</ZIndex>
+                      <ReportItems>
+                        <Textbox Name="textbox5">
+                          <Top>0.5in</Top>
+                          <Style>
+                            <Format>F2</Format>
+                            <TextAlign>Center</TextAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                          <ZIndex>2</ZIndex>
+                          <CanGrow>true</CanGrow>
+                          <Left>0.02083in</Left>
+                          <Value>=( Fields!no.Value/Sum(Fields!no.Value, "DataSet2_Table14Cow"))*100</Value>
+                        </Textbox>
+                        <Textbox Name="textbox4">
+                          <Top>0.25in</Top>
+                          <Style>
+                            <Format>F2</Format>
+                            <TextAlign>Center</TextAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                          <ZIndex>1</ZIndex>
+                          <CanGrow>true</CanGrow>
+                          <Left>0.02083in</Left>
+                          <Height>0.25in</Height>
+                          <Value>=(Fields!no.Value/(Fields!no.Value+Fields!ID1_2.Value+Fields!ID3___4.Value+Fields!ID4_.Value))*100</Value>
+                        </Textbox>
+                        <Textbox Name="no">
+                          <rd:DefaultName>no</rd:DefaultName>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                          <CanGrow>true</CanGrow>
+                          <Left>0.02083in</Left>
+                          <Height>0.25in</Height>
+                          <Value>=Fields!no.Value</Value>
+                        </Textbox>
+                      </ReportItems>
+                      <Style>
+                        <BorderStyle>
+                          <Default>Groove</Default>
+                        </BorderStyle>
+                      </Style>
+                    </Rectangle>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Rectangle Name="rectangle2">
+                      <ZIndex>3</ZIndex>
+                      <ReportItems>
+                        <Textbox Name="textbox11">
+                          <Top>0.5in</Top>
+                          <Style>
+                            <Format>F2</Format>
+                            <TextAlign>Center</TextAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                          <ZIndex>2</ZIndex>
+                          <CanGrow>true</CanGrow>
+                          <Left>0.02083in</Left>
+                          <Value>=( Fields!ID1_2.Value/Sum(Fields!ID1_2.Value, "DataSet2_Table14Cow"))*100</Value>
+                        </Textbox>
+                        <Textbox Name="textbox6">
+                          <Top>0.25in</Top>
+                          <Style>
+                            <Format>F2</Format>
+                            <TextAlign>Center</TextAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                          <ZIndex>1</ZIndex>
+                          <CanGrow>true</CanGrow>
+                          <Height>0.25in</Height>
+                          <Value>=(Fields!ID1_2.Value/(Fields!no.Value+Fields!ID1_2.Value+Fields!ID3___4.Value+Fields!ID4_.Value))*100</Value>
+                        </Textbox>
+                        <Textbox Name="ID1_2_1">
+                          <rd:DefaultName>ID1_2_1</rd:DefaultName>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                          <CanGrow>true</CanGrow>
+                          <Height>0.25in</Height>
+                          <Value>=Fields!ID1_2.Value</Value>
+                        </Textbox>
+                      </ReportItems>
+                      <Style>
+                        <BorderStyle>
+                          <Default>Groove</Default>
+                        </BorderStyle>
+                      </Style>
+                    </Rectangle>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Rectangle Name="rectangle8">
+                      <ZIndex>2</ZIndex>
+                      <ReportItems>
+                        <Textbox Name="textbox16">
+                          <Top>0.5in</Top>
+                          <Width>0.85417in</Width>
+                          <Style>
+                            <Format>F2</Format>
+                            <TextAlign>Center</TextAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                          <ZIndex>2</ZIndex>
+                          <CanGrow>true</CanGrow>
+                          <Value>=( Fields!ID3___4.Value/Sum(Fields!ID4_.Value, "DataSet2_Table14Cow"))*100</Value>
+                        </Textbox>
+                        <Textbox Name="textbox34">
+                          <Top>0.25in</Top>
+                          <Width>0.85417in</Width>
+                          <Style>
+                            <Format>F2</Format>
+                            <TextAlign>Center</TextAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                          <ZIndex>1</ZIndex>
+                          <CanGrow>true</CanGrow>
+                          <Height>0.25in</Height>
+                          <Value>=(Fields!ID3___4.Value/(Fields!no.Value+Fields!ID1_2.Value+Fields!ID3___4.Value+Fields!ID4_.Value))*100</Value>
+                        </Textbox>
+                        <Textbox Name="textbox35">
+                          <Width>0.85417in</Width>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                          <CanGrow>true</CanGrow>
+                          <Height>0.25in</Height>
+                          <Value>=Fields!ID3___4.Value</Value>
+                        </Textbox>
+                      </ReportItems>
+                      <Style>
+                        <BorderStyle>
+                          <Default>Groove</Default>
+                        </BorderStyle>
+                      </Style>
+                    </Rectangle>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Rectangle Name="rectangle11">
+                      <ZIndex>1</ZIndex>
+                      <ReportItems>
+                        <Textbox Name="textbox30">
+                          <Top>0.5in</Top>
+                          <Width>0.85417in</Width>
+                          <Style>
+                            <Format>F2</Format>
+                            <TextAlign>Center</TextAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                          <ZIndex>2</ZIndex>
+                          <CanGrow>true</CanGrow>
+                          <Value>=( Fields!ID4_.Value/Sum(Fields!ID4_.Value, "DataSet2_Table14Cow"))*100</Value>
+                        </Textbox>
+                        <Textbox Name="textbox38">
+                          <Top>0.25in</Top>
+                          <Width>0.85417in</Width>
+                          <Style>
+                            <Format>F2</Format>
+                            <TextAlign>Center</TextAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                          <ZIndex>1</ZIndex>
+                          <CanGrow>true</CanGrow>
+                          <Height>0.25in</Height>
+                          <Value>=(Fields!ID4_.Value/(Fields!no.Value+Fields!ID1_2.Value+Fields!ID3___4.Value+Fields!ID4_.Value))*100</Value>
+                        </Textbox>
+                        <Textbox Name="textbox39">
+                          <Width>0.85417in</Width>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                          <CanGrow>true</CanGrow>
+                          <Height>0.25in</Height>
+                          <Value>=Fields!ID4_.Value</Value>
+                        </Textbox>
+                      </ReportItems>
+                      <Style>
+                        <BorderStyle>
+                          <Default>Groove</Default>
+                        </BorderStyle>
+                      </Style>
+                    </Rectangle>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Rectangle Name="rectangle6">
+                      <ReportItems>
+                        <Textbox Name="textbox20">
+                          <Top>0.5in</Top>
+                          <Style>
+                            <Format>F2</Format>
+                            <TextAlign>Center</TextAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                          <ZIndex>2</ZIndex>
+                          <CanGrow>true</CanGrow>
+                          <Left>0.02083in</Left>
+                          <Value>=( Fields!total.Value/Sum(Fields!total.Value, "DataSet2_Table14Cow"))*100</Value>
+                        </Textbox>
+                        <Textbox Name="textbox21">
+                          <Top>0.25in</Top>
+                          <Style>
+                            <Format>F2</Format>
+                            <TextAlign>Center</TextAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                          <ZIndex>1</ZIndex>
+                          <CanGrow>true</CanGrow>
+                          <Left>0.02083in</Left>
+                          <Height>0.25in</Height>
+                          <Value>=(Fields!no.Value/(Fields!no.Value+Fields!ID1_2.Value+Fields!ID3___4.Value+Fields!ID4_.Value))*100
++(Fields!ID1_2.Value/(Fields!no.Value+Fields!ID1_2.Value+Fields!ID3___4.Value+Fields!ID4_.Value))*100
++(Fields!ID3___4.Value/(Fields!no.Value+Fields!ID1_2.Value+Fields!ID3___4.Value+Fields!ID4_.Value))*100
++(Fields!ID4_.Value/(Fields!no.Value+Fields!ID1_2.Value+Fields!ID3___4.Value+Fields!ID4_.Value))*100</Value>
+                        </Textbox>
+                        <Textbox Name="textbox22">
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                          <CanGrow>true</CanGrow>
+                          <Left>0.02083in</Left>
+                          <Height>0.25in</Height>
+                          <Value>=Fields!total.Value</Value>
+                        </Textbox>
+                      </ReportItems>
+                      <Style>
+                        <BorderStyle>
+                          <Default>Groove</Default>
+                        </BorderStyle>
+                      </Style>
+                    </Rectangle>
+                  </ReportItems>
+                </TableCell>
+              </TableCells>
+              <Height>0.75in</Height>
+            </TableRow>
+          </TableRows>
+        </Details>
+        <Header>
+          <TableRows>
+            <TableRow>
+              <TableCells>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox1">
+                      <rd:DefaultName>textbox1</rd:DefaultName>
+                      <Style>
+                        <BorderStyle>
+                          <Default>Groove</Default>
+                        </BorderStyle>
+                        <FontWeight>700</FontWeight>
+                        <TextAlign>Center</TextAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                      <ZIndex>14</ZIndex>
+                      <CanGrow>true</CanGrow>
+                      <Value>                                                        Union Name</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ColSpan>4</ColSpan>
+                  <ReportItems>
+                    <Table Name="table2">
+                      <ZIndex>13</ZIndex>
+                      <Style>
+                        <BorderStyle>
+                          <Default>Groove</Default>
+                        </BorderStyle>
+                      </Style>
+                      <Header>
+                        <TableRows>
+                          <TableRow>
+                            <TableCells>
+                              <TableCell>
+                                <ColSpan>4</ColSpan>
+                                <ReportItems>
+                                  <Textbox Name="textbox2">
+                                    <rd:DefaultName>textbox2</rd:DefaultName>
+                                    <Style>
+                                      <BorderStyle>
+                                        <Default>Groove</Default>
+                                      </BorderStyle>
+                                      <FontWeight>700</FontWeight>
+                                      <TextAlign>Center</TextAlign>
+                                      <PaddingLeft>2pt</PaddingLeft>
+                                      <PaddingRight>2pt</PaddingRight>
+                                      <PaddingTop>2pt</PaddingTop>
+                                      <PaddingBottom>2pt</PaddingBottom>
+                                    </Style>
+                                    <ZIndex>4</ZIndex>
+                                    <CanGrow>true</CanGrow>
+                                    <Value>Cow</Value>
+                                  </Textbox>
+                                </ReportItems>
+                              </TableCell>
+                            </TableCells>
+                            <Height>0.22727in</Height>
+                          </TableRow>
+                        </TableRows>
+                      </Header>
+                      <TableColumns>
+                        <TableColumn>
+                          <Width>0.875in</Width>
+                        </TableColumn>
+                        <TableColumn>
+                          <Width>0.875in</Width>
+                        </TableColumn>
+                        <TableColumn>
+                          <Width>0.875in</Width>
+                        </TableColumn>
+                        <TableColumn>
+                          <Width>0.875in</Width>
+                        </TableColumn>
+                      </TableColumns>
+                      <Footer>
+                        <TableRows>
+                          <TableRow>
+                            <TableCells>
+                              <TableCell>
+                                <ReportItems>
+                                  <Textbox Name="textbox14">
+                                    <rd:DefaultName>textbox14</rd:DefaultName>
+                                    <Style>
+                                      <BorderStyle>
+                                        <Default>Groove</Default>
+                                      </BorderStyle>
+                                      <FontWeight>700</FontWeight>
+                                      <TextAlign>Center</TextAlign>
+                                      <PaddingLeft>2pt</PaddingLeft>
+                                      <PaddingRight>2pt</PaddingRight>
+                                      <PaddingTop>2pt</PaddingTop>
+                                      <PaddingBottom>2pt</PaddingBottom>
+                                    </Style>
+                                    <ZIndex>3</ZIndex>
+                                    <CanGrow>true</CanGrow>
+                                    <Value>No</Value>
+                                  </Textbox>
+                                </ReportItems>
+                              </TableCell>
+                              <TableCell>
+                                <ReportItems>
+                                  <Textbox Name="textbox31">
+                                    <rd:DefaultName>textbox31</rd:DefaultName>
+                                    <Style>
+                                      <BorderStyle>
+                                        <Default>Groove</Default>
+                                      </BorderStyle>
+                                      <FontWeight>700</FontWeight>
+                                      <TextAlign>Center</TextAlign>
+                                      <PaddingLeft>2pt</PaddingLeft>
+                                      <PaddingRight>2pt</PaddingRight>
+                                      <PaddingTop>2pt</PaddingTop>
+                                      <PaddingBottom>2pt</PaddingBottom>
+                                    </Style>
+                                    <ZIndex>2</ZIndex>
+                                    <CanGrow>true</CanGrow>
+                                    <Value>1-2</Value>
+                                  </Textbox>
+                                </ReportItems>
+                              </TableCell>
+                              <TableCell>
+                                <ReportItems>
+                                  <Textbox Name="textbox32">
+                                    <rd:DefaultName>textbox32</rd:DefaultName>
+                                    <Style>
+                                      <BorderStyle>
+                                        <Default>Groove</Default>
+                                      </BorderStyle>
+                                      <FontWeight>700</FontWeight>
+                                      <TextAlign>Center</TextAlign>
+                                      <PaddingLeft>2pt</PaddingLeft>
+                                      <PaddingRight>2pt</PaddingRight>
+                                      <PaddingTop>2pt</PaddingTop>
+                                      <PaddingBottom>2pt</PaddingBottom>
+                                    </Style>
+                                    <ZIndex>1</ZIndex>
+                                    <CanGrow>true</CanGrow>
+                                    <Value>3-4</Value>
+                                  </Textbox>
+                                </ReportItems>
+                              </TableCell>
+                              <TableCell>
+                                <ReportItems>
+                                  <Textbox Name="textbox33">
+                                    <rd:DefaultName>textbox33</rd:DefaultName>
+                                    <Style>
+                                      <BorderStyle>
+                                        <Default>Groove</Default>
+                                      </BorderStyle>
+                                      <FontWeight>700</FontWeight>
+                                      <TextAlign>Center</TextAlign>
+                                      <PaddingLeft>2pt</PaddingLeft>
+                                      <PaddingRight>2pt</PaddingRight>
+                                      <PaddingTop>2pt</PaddingTop>
+                                      <PaddingBottom>2pt</PaddingBottom>
+                                    </Style>
+                                    <CanGrow>true</CanGrow>
+                                    <Value>5+</Value>
+                                  </Textbox>
+                                </ReportItems>
+                              </TableCell>
+                            </TableCells>
+                            <Height>0.22728in</Height>
+                          </TableRow>
+                        </TableRows>
+                      </Footer>
+                    </Table>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox3">
+                      <rd:DefaultName>textbox3</rd:DefaultName>
+                      <Style>
+                        <BorderStyle>
+                          <Default>Groove</Default>
+                        </BorderStyle>
+                        <FontWeight>700</FontWeight>
+                        <TextAlign>Center</TextAlign>
+                      </Style>
+                      <ZIndex>12</ZIndex>
+                      <CanGrow>true</CanGrow>
+                      <Value>                                   Total</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+              </TableCells>
+              <Height>0.45455in</Height>
+            </TableRow>
+          </TableRows>
+        </Header>
+        <TableColumns>
+          <TableColumn>
+            <Width>1.45833in</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>0.875in</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>0.875in</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>0.875in</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>0.875in</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>0.875in</Width>
+          </TableColumn>
+        </TableColumns>
+        <Height>1.95455in</Height>
+        <Footer>
+          <TableRows>
+            <TableRow>
+              <TableCells>
+                <TableCell>
+                  <ReportItems>
+                    <Rectangle Name="rectangle10">
+                      <ZIndex>11</ZIndex>
+                      <ReportItems>
+                        <Textbox Name="textbox42">
+                          <Top>0.5in</Top>
+                          <Width>0.25in</Width>
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                          <ZIndex>3</ZIndex>
+                          <CanGrow>true</CanGrow>
+                          <Left>1.125in</Left>
+                          <Height>0.23958in</Height>
+                          <Value>%</Value>
+                        </Textbox>
+                        <Textbox Name="textbox43">
+                          <Top>0.25in</Top>
+                          <Width>0.25in</Width>
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                          <ZIndex>2</ZIndex>
+                          <CanGrow>true</CanGrow>
+                          <Left>1.125in</Left>
+                          <Height>0.23958in</Height>
+                          <Value>%</Value>
+                        </Textbox>
+                        <Textbox Name="textbox44">
+                          <Top>0.01042in</Top>
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                          <ZIndex>1</ZIndex>
+                          <CanGrow>true</CanGrow>
+                          <Left>1.08333in</Left>
+                          <Height>0.25in</Height>
+                          <Value>NO</Value>
+                        </Textbox>
+                        <Textbox Name="textbox45">
+                          <Top>0.25in</Top>
+                          <Width>1in</Width>
+                          <Style>
+                            <FontWeight>700</FontWeight>
+                            <TextAlign>Center</TextAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                          <CanGrow>true</CanGrow>
+                          <Height>0.25in</Height>
+                          <Value>Total</Value>
+                        </Textbox>
+                      </ReportItems>
+                      <Style>
+                        <BorderStyle>
+                          <Default>Groove</Default>
+                        </BorderStyle>
+                      </Style>
+                    </Rectangle>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Rectangle Name="rectangle4">
+                      <ZIndex>10</ZIndex>
+                      <ReportItems>
+                        <Textbox Name="textbox10">
+                          <Top>0.5in</Top>
+                          <Style>
+                            <Format>F2</Format>
+                            <TextAlign>Center</TextAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                          <ZIndex>2</ZIndex>
+                          <CanGrow>true</CanGrow>
+                          <Left>0.02083in</Left>
+                          <Value>100.00</Value>
+                        </Textbox>
+                        <Textbox Name="textbox17">
+                          <Top>0.25in</Top>
+                          <Style>
+                            <Format>F2</Format>
+                            <TextAlign>Center</TextAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                          <ZIndex>1</ZIndex>
+                          <CanGrow>true</CanGrow>
+                          <Left>0.02083in</Left>
+                          <Height>0.25in</Height>
+                          <Value>=(Sum(Fields!no.Value, "DataSet2_Table14Cow")/(Sum(Fields!no.Value, "DataSet2_Table14Cow")+Sum(Fields!ID1_2.Value, "DataSet2_Table14Cow")+Sum(Fields!ID3___4.Value, "DataSet2_Table14Cow")+Sum(Fields!ID4_.Value, "DataSet2_Table14Cow")))*100</Value>
+                        </Textbox>
+                        <Textbox Name="textbox18">
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                          <CanGrow>true</CanGrow>
+                          <Left>0.02083in</Left>
+                          <Height>0.25in</Height>
+                          <Value>=Sum(Fields!no.Value)</Value>
+                        </Textbox>
+                      </ReportItems>
+                      <Style>
+                        <BorderStyle>
+                          <Default>Groove</Default>
+                        </BorderStyle>
+                      </Style>
+                    </Rectangle>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Rectangle Name="rectangle5">
+                      <ZIndex>9</ZIndex>
+                      <ReportItems>
+                        <Textbox Name="ID1_2">
+                          <rd:DefaultName>ID1_2</rd:DefaultName>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                          <ZIndex>2</ZIndex>
+                          <CanGrow>true</CanGrow>
+                          <Height>0.25in</Height>
+                          <Value>=Sum(Fields!ID1_2.Value)</Value>
+                        </Textbox>
+                        <Textbox Name="textbox12">
+                          <Top>0.5in</Top>
+                          <Style>
+                            <Format>F2</Format>
+                            <TextAlign>Center</TextAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                          <ZIndex>1</ZIndex>
+                          <CanGrow>true</CanGrow>
+                          <Left>0.02083in</Left>
+                          <Value>100.00</Value>
+                        </Textbox>
+                        <Textbox Name="textbox19">
+                          <Top>0.25in</Top>
+                          <Style>
+                            <Format>F2</Format>
+                            <TextAlign>Center</TextAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                          <CanGrow>true</CanGrow>
+                          <Left>0.02083in</Left>
+                          <Height>0.25in</Height>
+                          <Value>=(Sum(Fields!ID1_2.Value, "DataSet2_Table14Cow")/(Sum(Fields!no.Value, "DataSet2_Table14Cow")+Sum(Fields!ID1_2.Value, "DataSet2_Table14Cow")+Sum(Fields!ID3___4.Value, "DataSet2_Table14Cow")+Sum(Fields!ID4_.Value, "DataSet2_Table14Cow")))*100</Value>
+                        </Textbox>
+                      </ReportItems>
+                      <Style>
+                        <BorderStyle>
+                          <Default>Groove</Default>
+                        </BorderStyle>
+                      </Style>
+                    </Rectangle>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Rectangle Name="rectangle9">
+                      <ZIndex>8</ZIndex>
+                      <ReportItems>
+                        <Textbox Name="textbox26">
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                          <ZIndex>2</ZIndex>
+                          <CanGrow>true</CanGrow>
+                          <Height>0.25in</Height>
+                          <Value>=Sum(Fields!ID3___4.Value)</Value>
+                        </Textbox>
+                        <Textbox Name="textbox36">
+                          <Top>0.5in</Top>
+                          <Style>
+                            <Format>F2</Format>
+                            <TextAlign>Center</TextAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                          <ZIndex>1</ZIndex>
+                          <CanGrow>true</CanGrow>
+                          <Left>0.02083in</Left>
+                          <Value>100.00</Value>
+                        </Textbox>
+                        <Textbox Name="textbox37">
+                          <Top>0.25in</Top>
+                          <Style>
+                            <Format>F2</Format>
+                            <TextAlign>Center</TextAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                          <CanGrow>true</CanGrow>
+                          <Left>0.02083in</Left>
+                          <Height>0.25in</Height>
+                          <Value>=(Sum(Fields!ID3___4.Value, "DataSet2_Table14Cow")/(Sum(Fields!no.Value, "DataSet2_Table14Cow")+Sum(Fields!ID1_2.Value, "DataSet2_Table14Cow")+Sum(Fields!ID3___4.Value, "DataSet2_Table14Cow")+Sum(Fields!ID4_.Value, "DataSet2_Table14Cow")))*100</Value>
+                        </Textbox>
+                      </ReportItems>
+                      <Style>
+                        <BorderStyle>
+                          <Default>Groove</Default>
+                        </BorderStyle>
+                      </Style>
+                    </Rectangle>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Rectangle Name="rectangle12">
+                      <ZIndex>7</ZIndex>
+                      <ReportItems>
+                        <Textbox Name="textbox29">
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                          <ZIndex>2</ZIndex>
+                          <CanGrow>true</CanGrow>
+                          <Height>0.25in</Height>
+                          <Value>=Sum(Fields!ID4_.Value)</Value>
+                        </Textbox>
+                        <Textbox Name="textbox40">
+                          <Top>0.5in</Top>
+                          <Style>
+                            <Format>F2</Format>
+                            <TextAlign>Center</TextAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                          <ZIndex>1</ZIndex>
+                          <CanGrow>true</CanGrow>
+                          <Left>0.02083in</Left>
+                          <Value>100.00</Value>
+                        </Textbox>
+                        <Textbox Name="textbox41">
+                          <Top>0.25in</Top>
+                          <Style>
+                            <Format>F2</Format>
+                            <TextAlign>Center</TextAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                          <CanGrow>true</CanGrow>
+                          <Left>0.02083in</Left>
+                          <Height>0.25in</Height>
+                          <Value>=(Sum(Fields!ID4_.Value, "DataSet2_Table14Cow")/(Sum(Fields!no.Value, "DataSet2_Table14Cow")+Sum(Fields!ID1_2.Value, "DataSet2_Table14Cow")+Sum(Fields!ID3___4.Value, "DataSet2_Table14Cow")+Sum(Fields!ID4_.Value, "DataSet2_Table14Cow")))*100</Value>
+                        </Textbox>
+                      </ReportItems>
+                      <Style>
+                        <BorderStyle>
+                          <Default>Groove</Default>
+                        </BorderStyle>
+                      </Style>
+                    </Rectangle>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Rectangle Name="rectangle13">
+                      <ZIndex>6</ZIndex>
+                      <ReportItems>
+                        <Textbox Name="textbox27">
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                          <ZIndex>2</ZIndex>
+                          <CanGrow>true</CanGrow>
+                          <Height>0.25in</Height>
+                          <Value>=Sum(Fields!total.Value)</Value>
+                        </Textbox>
+                        <Textbox Name="textbox46">
+                          <Top>0.5in</Top>
+                          <Style>
+                            <Format>F2</Format>
+                            <TextAlign>Center</TextAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                          <ZIndex>1</ZIndex>
+                          <CanGrow>true</CanGrow>
+                          <Left>0.02083in</Left>
+                          <Value>100.00</Value>
+                        </Textbox>
+                        <Textbox Name="textbox47">
+                          <Top>0.25in</Top>
+                          <Style>
+                            <Format>F2</Format>
+                            <TextAlign>Center</TextAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                          <CanGrow>true</CanGrow>
+                          <Left>0.02083in</Left>
+                          <Height>0.25in</Height>
+                          <Value>=(Sum(Fields!no.Value, "DataSet2_Table14Cow")/(Sum(Fields!no.Value, "DataSet2_Table14Cow")+Sum(Fields!ID1_2.Value, "DataSet2_Table14Cow")+Sum(Fields!ID3___4.Value, "DataSet2_Table14Cow")+Sum(Fields!ID4_.Value, "DataSet2_Table14Cow")))*100
++(Sum(Fields!ID1_2.Value, "DataSet2_Table14Cow")/(Sum(Fields!no.Value, "DataSet2_Table14Cow")+Sum(Fields!ID1_2.Value, "DataSet2_Table14Cow")+Sum(Fields!ID3___4.Value, "DataSet2_Table14Cow")+Sum(Fields!ID4_.Value, "DataSet2_Table14Cow")))*100
++(Sum(Fields!ID3___4.Value, "DataSet2_Table14Cow")/(Sum(Fields!no.Value, "DataSet2_Table14Cow")+Sum(Fields!ID1_2.Value, "DataSet2_Table14Cow")+Sum(Fields!ID3___4.Value, "DataSet2_Table14Cow")+Sum(Fields!ID4_.Value, "DataSet2_Table14Cow")))*100
++(Sum(Fields!ID4_.Value, "DataSet2_Table14Cow")/(Sum(Fields!no.Value, "DataSet2_Table14Cow")+Sum(Fields!ID1_2.Value, "DataSet2_Table14Cow")+Sum(Fields!ID3___4.Value, "DataSet2_Table14Cow")+Sum(Fields!ID4_.Value, "DataSet2_Table14Cow")))*100</Value>
+                        </Textbox>
+                      </ReportItems>
+                      <Style>
+                        <BorderStyle>
+                          <Default>Groove</Default>
+                        </BorderStyle>
+                      </Style>
+                    </Rectangle>
+                  </ReportItems>
+                </TableCell>
+              </TableCells>
+              <Height>0.75in</Height>
+            </TableRow>
+          </TableRows>
+        </Footer>
+        <Left>0.33333in</Left>
+      </Table>
+    </ReportItems>
+    <Height>2.5in</Height>
+  </Body>
+  <Language>en-US</Language>
+  <TopMargin>1in</TopMargin>
+</Report>

@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2005/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <DataSources>
+    <DataSource Name="baselineConnectionString">
+      <rd:DataSourceID>a1025c74-a785-44eb-a26d-20b7f3425609</rd:DataSourceID>
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString>Data Source=RASEL-49A299613;Initial Catalog=baseline;Integrated Security=True</ConnectString>
+      </ConnectionProperties>
+    </DataSource>
+  </DataSources>
+  <InteractiveHeight>11in</InteractiveHeight>
+  <rd:DrawGrid>true</rd:DrawGrid>
+  <InteractiveWidth>8.5in</InteractiveWidth>
+  <rd:SnapToGrid>true</rd:SnapToGrid>
+  <RightMargin>1in</RightMargin>
+  <LeftMargin>1in</LeftMargin>
+  <BottomMargin>1in</BottomMargin>
+  <rd:ReportID>ed656a19-7813-4da8-b9b0-e8c50b964794</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet2_Table14Cow">
+      <Fields>
+        <Field Name="union_name">
+          <DataField>union name</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ID0_2">
+          <DataField>0-2</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="ID3___4">
+          <DataField>3 - 4</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="ID4_">
+          <DataField>4+</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>baselineConnectionString</DataSourceName>
+        <CommandText>SELECT     a.x AS [union name], a.y AS [0-2], b.y AS [3 - 4], c.y AS [4+]
+FROM         (SELECT     union_name AS x, COUNT(khana_id) AS y
+                       FROM          khana INNER JOIN
+                                              cnc ON khana.cnc_id = cnc.cnc_id INNER JOIN
+                                              [union] ON cnc.union_id = [union].union_id
+                       WHERE      (khana.cow &lt; 3)
+                       GROUP BY union_name) a INNER JOIN
+                          (SELECT     union_name AS x, COUNT(khana_id) AS y
+                            FROM          khana INNER JOIN
+                                                   cnc ON khana.cnc_id = cnc.cnc_id INNER JOIN
+                                                   [union] ON cnc.union_id = [union].union_id
+                            WHERE      (khana.cow BETWEEN 3 AND 4)
+                            GROUP BY union_name) b ON a.x = b.x INNER JOIN
+                          (SELECT     union_name AS x, COUNT(khana_id) AS y
+                            FROM          khana INNER JOIN
+                                                   cnc ON khana.cnc_id = cnc.cnc_id INNER JOIN
+                                                   [union] ON cnc.union_id = [union].union_id
+                            WHERE      (khana.cow &gt;= 5)
+                            GROUP BY union_name) c ON b.x = c.x</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <rd:DataSetInfo>
+        <rd:DataSetName>DataSet2</rd:DataSetName>
+        <rd:TableName>Table14Cow</rd:TableName>
+        <rd:TableAdapterName>Table14CowTableAdapter</rd:TableAdapterName>
+        <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
+        <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
+      </rd:DataSetInfo>
+    </DataSet>
+  </DataSets>
+  <Width>6.50309in</Width>
+  <Body>
+    <ReportItems>
+      <Textbox Name="textbox1">
+        <rd:DefaultName>textbox1</rd:DefaultName>
+        <Top>0.25in</Top>
+        <Width>6in</Width>
+        <Style>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+        <CanGrow>true</CanGrow>
+        <Left>0.25in</Left>
+        <Height>0.25in</Height>
+        <Value>Distribution Of Households by No of Domestic Animals/Birds</Value>
+      </Textbox>
+    </ReportItems>
+    <Height>3.36612in</Height>
+  </Body>
+  <Language>en-US</Language>
+  <TopMargin>1in</TopMargin>
+</Report>

@@ -1,0 +1,12 @@
+C:\Documents and Settings\HP\Desktop\Restore\Restore\bin\Debug\Restore.exe
+C:\Documents and Settings\HP\Desktop\Restore\Restore\bin\Debug\Restore.pdb
+C:\Documents and Settings\HP\Desktop\Restore\Restore\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\HP\Desktop\Restore\Restore\obj\Debug\Restore.Form1.resources
+C:\Documents and Settings\HP\Desktop\Restore\Restore\obj\Debug\Restore.Properties.Resources.resources
+C:\Documents and Settings\HP\Desktop\Restore\Restore\obj\Debug\Restore.csproj.GenerateResource.Cache
+C:\Documents and Settings\HP\Desktop\Restore\Restore\obj\Debug\Restore.exe
+C:\Documents and Settings\HP\Desktop\Restore\Restore\obj\Debug\Restore.pdb
+C:\Documents and Settings\HP\Desktop\Restore\Restore\bin\Debug\BackEnd.dll
+C:\Documents and Settings\HP\Desktop\Restore\Restore\bin\Debug\BackEnd.pdb
+G:\Baseline Survey Codes (Finished)\Restore\Restore\obj\Debug\Restore.exe
+G:\Baseline Survey Codes (Finished)\Restore\Restore\obj\Debug\Restore.pdb
